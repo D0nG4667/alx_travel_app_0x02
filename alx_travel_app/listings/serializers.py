@@ -3,7 +3,7 @@
 
 from rest_framework import serializers
 from django.db.models import Avg
-from .models import Listing, Booking, Review
+from .models import Listing, Booking, Review, Payment
 from drf_spectacular.utils import extend_schema_field
 
 
@@ -101,3 +101,26 @@ class ListingSerializer(serializers.ModelSerializer):
     def get_average_rating(self, obj) -> float:
         """Compute the average rating from all reviews for this listing."""
         return obj.reviews.aggregate(avg=Avg('rating')).get('avg') or 0.0
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    """Serializer for Payment model."""
+
+    class Meta:
+        model = Payment
+        fields = [
+            'id',
+            'booking_reference',
+            'amount',
+            'transaction_id',
+            'status',
+            'created_at',
+            'updated_at',
+        ]
+        read_only_fields = [
+            'id',
+            'transaction_id',
+            'status',
+            'created_at',
+            'updated_at',
+        ]

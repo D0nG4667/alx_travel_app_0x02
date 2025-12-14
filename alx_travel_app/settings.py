@@ -106,7 +106,9 @@ DATABASES = {
     }
 }
 
-print(DATABASES)
+# Chapa
+CHAPA_SECRET_KEY = env('CHAPA_SECRET_KEY', default='your_chapa_secret_key')
+CHAPA_BASE_URL = env('CHAPA_BASE_URL', default='https://api.chapa.co/v1/')
 
 
 # Password validation
