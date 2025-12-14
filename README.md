@@ -17,7 +17,6 @@ A modular, scalable Django-based travel listing platform with REST APIs, Swagger
 - [Data Seeding](#data-seeding)
 - [Docker Setup](#docker-setup)
 - [Future Enhancements](#future-enhancements)
-- [License](#license)
 
 ---
 
@@ -61,8 +60,8 @@ This setup ensures scalability, maintainability, and readiness for production.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/DonG4667/alx_travel_app_0x00.git
-   cd alx_travel_app_0x00
+   git clone https://github.com/DonG4667/alx_travel_app_0x02.git
+   cd alx_travel_app_0x02
    ```
 
 2. **Create a virtual environment:**
@@ -203,3 +202,29 @@ This command creates realistic data for development and testing, including rando
 - Add background tasks for notifications, emails, and reporting.
 - Enable image uploads and media storage for listings.
 - Implement caching strategies for performance optimization.
+
+## Payment Integration with Chapa
+
+### Setup
+
+- Add `.env` with `CHAPA_SECRET_KEY`.
+- Run migrations for `Payment` model.
+
+### Endpoints
+
+- `POST /payments/initiate/` → Initiates payment, returns checkout URL.
+- `GET /payments/verify/?tx_ref=...` → Verifies payment status.
+
+### Workflow
+
+1. User books a listing.
+2. Payment initiated via Chapa.
+3. User completes payment.
+4. Verification updates status in DB.
+5. Confirmation email sent via Celery.
+
+### Testing
+
+- Use Chapa sandbox environment.
+- Verify logs and DB updates.
+- Screenshots included in `/docs/screenshots`.
